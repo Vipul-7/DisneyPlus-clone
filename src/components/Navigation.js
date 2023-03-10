@@ -1,9 +1,18 @@
 import styled from "styled-components";
+import { auth, provider } from "../firebase";
 
 const NavigationBar = () => {
+  const handlerAuth = () => {
+    auth
+      .signInWithPopup(provider)
+      .then((res) => console.log(res))
+      .catch((err) => alert(err.message));
+  };
+
   return (
     <Nav>
       <Logo>
+        {/* <img src="/images/disney-hotstar-logo-dark.svg" alt="Disney+" /> */}
         <img src="/images/logo.svg" alt="Disney+" />
       </Logo>
       <NavMenu>
@@ -32,6 +41,7 @@ const NavigationBar = () => {
           <span>SERIES</span>
         </a>
       </NavMenu>
+      <Login onClick={handlerAuth}>login</Login>
     </Nav>
   );
 };
@@ -55,6 +65,7 @@ const Nav = styled.nav`
 
 const Logo = styled.a`
   padding: 0;
+  /* width: 140px; */
   width: 80px;
   margin-top: 4px;
   max-height: 70px;
@@ -129,6 +140,21 @@ const NavMenu = styled.div`
   }
 
   @media (max-width: 768px) {
-    display: nonde;
+    display: none;
+  }
+`;
+
+const Login = styled.a`
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 8px 16px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  border: 1px solid #f9f9f9;
+  border-radius: 4px;
+  transition: all 0.2s ease 0s;
+  &:hover {
+    background-color: #f9f9f9;
+    color: #000;
+    border-color: transparent;
   }
 `;
