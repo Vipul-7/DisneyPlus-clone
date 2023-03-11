@@ -1,12 +1,44 @@
+import { NavLink, useNavigate, useNavigation } from "react-router-dom";
 import styled from "styled-components";
 import { auth, provider } from "../firebase";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { userSliceActions } from "../store/user/userSlice";
+import { useEffect } from "react";
 
 const NavigationBar = () => {
-  const handlerAuth = () => {
-    auth
-      .signInWithPopup(provider)
-      .then((res) => console.log(res))
-      .catch((err) => alert(err.message));
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const userName = useSelector((state) => state.user.name);
+  const userPhoto = useSelector((state) => state.user.photo);
+
+  useEffect(() => {
+    auth.onAuthStateChanged(async (user) => {
+      if (user) {
+        setUser(user);
+        navigate("/home");
+      }
+    });
+  }, [userName]);
+
+  const handlerAuth = async () => {
+    try {
+      const result = await auth.signInWithPopup(provider);
+      setUser(result.user);
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+
+  const setUser = (user) => {
+    dispatch(
+      userSliceActions.setUserLoginDetails({
+        name: user.displayName,
+        email: user.email,
+        photo: user.photoURL,
+      })
+    );
   };
 
   return (
@@ -15,33 +47,39 @@ const NavigationBar = () => {
         {/* <img src="/images/disney-hotstar-logo-dark.svg" alt="Disney+" /> */}
         <img src="/images/logo.svg" alt="Disney+" />
       </Logo>
-      <NavMenu>
-        <a href="/home">
-          <img src="/images/home-icon.svg" alt="home-icon" />
-          <span>HOME</span>
-        </a>
-        <a href="/home">
-          <img src="/images/search-icon.svg" alt="search" />
-          <span>SEARCH</span>
-        </a>
-        <a href="/home">
-          <img src="/images/watchlist-icon.svg" alt="watchlist icon" />
-          <span>WATCHLIST</span>
-        </a>
-        <a href="/home">
-          <img src="/images/original-icon.svg" alt="original icon" />
-          <span>ORIGINALS</span>
-        </a>
-        <a href="/home">
-          <img src="/images/movie-icon.svg" alt="movie-icon" />
-          <span>MOVIES</span>
-        </a>
-        <a href="/home">
-          <img src="/images/series-icon.svg" alt="home-icon" />
-          <span>SERIES</span>
-        </a>
-      </NavMenu>
-      <Login onClick={handlerAuth}>login</Login>
+      {!userName ? (
+        <Login onClick={handlerAuth}>login</Login>
+      ) : (
+        <>
+          <NavMenu>
+            <NavLink href="/home">
+              <img src="/images/home-icon.svg" alt="home-icon" />
+              <span>HOME</span>
+            </NavLink>
+            <NavLink href="/home">
+              <img src="/images/search-icon.svg" alt="search" />
+              <span>SEARCH</span>
+            </NavLink>
+            <NavLink href="/home">
+              <img src="/images/watchlist-icon.svg" alt="watchlist icon" />
+              <span>WATCHLIST</span>
+            </NavLink>
+            <NavLink href="/home">
+              <img src="/images/original-icon.svg" alt="original icon" />
+              <span>ORIGINALS</span>
+            </NavLink>
+            <NavLink href="/home">
+              <img src="/images/movie-icon.svg" alt="movie-icon" />
+              <span>MOVIES</span>
+            </NavLink>
+            <NavLink href="/home">
+              <img src="/images/series-icon.svg" alt="home-icon" />
+              <span>SERIES</span>
+            </NavLink>
+          </NavMenu>
+          <UserImg src={userPhoto} alt={userName} />
+        </>
+      )}
     </Nav>
   );
 };
@@ -157,4 +195,9 @@ const Login = styled.a`
     color: #000;
     border-color: transparent;
   }
+`;
+
+const UserImg = styled.img`
+  height: 100%;
+  letter-spacing: 1.5px;
 `;
