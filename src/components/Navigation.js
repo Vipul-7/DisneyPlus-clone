@@ -1,4 +1,4 @@
-import { NavLink, useNavigate, useNavigation } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { auth, provider } from "../firebase";
 import { useDispatch } from "react-redux";
@@ -23,11 +23,21 @@ const NavigationBar = () => {
   }, [userName]);
 
   const handlerAuth = async () => {
-    try {
-      const result = await auth.signInWithPopup(provider);
-      setUser(result.user);
-    } catch (error) {
-      alert(error.message);
+    if (!userName)
+      try {
+        const signIn = await auth.signInWithPopup(provider);
+        setUser(signIn.user);
+      } catch (error) {
+        alert(error.message);
+      }
+    else {
+      try {
+        await auth.signOut();
+        dispatch(userSliceActions.setSignOutState());
+        navigate("/");
+      } catch (error) {
+        alert(error.message);
+      }
     }
   };
 
@@ -77,7 +87,12 @@ const NavigationBar = () => {
               <span>SERIES</span>
             </NavLink>
           </NavMenu>
-          <UserImg src={userPhoto} alt={userName} />
+          <SignOut>
+            <UserImg src={userPhoto} alt={userName} />
+            <DropDown>
+              <span onClick={handlerAuth}>Sign Out</span>
+            </DropDown>
+          </SignOut>
         </>
       )}
     </Nav>
@@ -200,4 +215,40 @@ const Login = styled.a`
 const UserImg = styled.img`
   height: 100%;
   letter-spacing: 1.5px;
+`;
+
+const DropDown = styled.div`
+  position: absolute;
+  top: 48px;
+  right: 0px;
+  background-color: rgb(19, 19, 19);
+  border: 1px solid rgba(151, 151, 151, 0.34);
+  border-radius: 4px;
+  box-shadow: rgb(0, 0, 0 / 50%) 0px 0px 18px 0px;
+  padding: 10px;
+  font-size: 14px;
+  letter-spacing: 3px;
+  width: 100px;
+  opacity: 0;
+`;
+
+const SignOut = styled.div`
+  position: relative;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+
+  ${UserImg} {
+    border-radius: 50%;
+  }
+
+  &:hover {
+    ${DropDown} {
+      opacity: 1;
+      transition-duration: 1s;
+    }
+  }
 `;
