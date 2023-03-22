@@ -1,14 +1,28 @@
 import styled from "styled-components";
 import ImgSlider from "../components/ImgSlider";
-import Recommanded from "../components/Recommanded";
 import Viewers from "../components/Viewers";
+
+import Recommanded from "../components/Movies-List-Card/Recommanded";
+import DisneyPlusOriginals from "../components/Movies-List-Card/DisneyPlusOriginals";
+import TwistInTheTale from "../components/Movies-List-Card/Twist_in_the_Tale";
+import AnimatedAdventures from "../components/Movies-List-Card/Animated_Adventures";
+import LatestOnDisneyPlus from "../components/Movies-List-Card/Latest_on_Disney_Plus";
+import BehindTheScenes from "../components/Movies-List-Card/Behind_the_Scenes";
+import AttackOfAnime from "../components/Movies-List-Card/Attack_of_Anime";
 
 const Home = () => {
   return (
     <Container>
       <ImgSlider />
       <Viewers />
+
       <Recommanded />
+      <DisneyPlusOriginals />
+      <TwistInTheTale />
+      <AnimatedAdventures />
+      <LatestOnDisneyPlus />
+      <BehindTheScenes />
+      <AttackOfAnime />
     </Container>
   );
 };
