@@ -1,22 +1,30 @@
-import firebase from 'firebase/compat/app';
-import 'firebase/compat/auth';
-import 'firebase/compat/firestore';
+import firebase from "firebase/compat/app";
+import "firebase/compat/auth";
+import "firebase/compat/firestore";
+
+const apiKey = process.env.REACT_APP_FIREBASE_API_KEY;
+const authDomain = process.env.REACT_APP_FIREBASE_AUTH_DOMAIN;
+const projectId = process.env.REACT_APP_FIREBASE_PROJECT_ID;
+const storageBucket = process.env.REACT_APP_FIREBASE_STORAGE_BUCKET;
+const messagingSenderId = process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID;
+const appId = process.env.REACT_APP_FIREBASE_APP_ID;
+const measurementId = process.env.REACT_APP_FIREBASE_MEASUREMENT_ID;
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDLOF59F0ctIqGLqiK5DCkZeUnCv7w2KA0",
-  authDomain: "disneyplus-clone-7c368.firebaseapp.com",
-  projectId: "disneyplus-clone-7c368",
-  storageBucket: "disneyplus-clone-7c368.appspot.com",
-  messagingSenderId: "426131682274",
-  appId: "1:426131682274:web:4df4382705e1fae7feffbb",
-  measurementId: "G-4LPX9PV03T"
+  apiKey: apiKey,
+  authDomain: authDomain,
+  projectId: projectId,
+  storageBucket: storageBucket,
+  messagingSenderId: messagingSenderId,
+  appId: appId,
+  measurementId: measurementId,
 };
 
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 const db = firebaseApp.firestore();
 const auth = firebase.auth();
-const provider  = new firebase.auth.GoogleAuthProvider();
+const provider = new firebase.auth.GoogleAuthProvider();
 // const storage = firebase.storage();
 
-export { auth, provider};
+export { auth, provider };
 export default db;
