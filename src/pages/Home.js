@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import ImgSlider from "../components/ImgSlider";
 import Viewers from "../components/Viewers";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import Recommanded from "../components/Movies-List-Card/Recommanded";
 import DisneyPlusOriginals from "../components/Movies-List-Card/DisneyPlusOriginals";
