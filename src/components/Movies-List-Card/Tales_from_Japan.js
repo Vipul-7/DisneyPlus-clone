@@ -2,12 +2,12 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-const TwistInTheTale = () => {
-  const data = useSelector((state) => state.movie.twistInTheTale);
+const TalesFromJapan = () => {
+  const data = useSelector((state) => state.movie.talesFromJapan);
 
   return (
     <Container>
-      <h4>Twist In The Tale</h4>
+      <h4>Tales from Japan</h4>
       <Content>
         {data &&
           data.map((item) => (
@@ -22,7 +22,7 @@ const TwistInTheTale = () => {
   );
 };
 
-export default TwistInTheTale;
+export default TalesFromJapan;
 
 const Container = styled.div`
   padding: 0px 0px 26px;

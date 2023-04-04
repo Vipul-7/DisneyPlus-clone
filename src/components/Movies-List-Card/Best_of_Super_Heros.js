@@ -2,12 +2,12 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-const LatestOnDisneyPlus = () => {
-  const data = useSelector((state) => state.movie.latestOnDisneyPlus);
+const BestOfSuperHeros = () => {
+  const data = useSelector((state) => state.movie.bestOfTheSuperheros);
 
   return (
     <Container>
-      <h4>Latest On Disney+</h4>
+      <h4>Best of Superheros</h4>
       <Content>
         {data &&
           data.map((item) => (
@@ -22,7 +22,7 @@ const LatestOnDisneyPlus = () => {
   );
 };
 
-export default LatestOnDisneyPlus;
+export default BestOfSuperHeros;
 
 const Container = styled.div`
   padding: 0px 0px 26px;

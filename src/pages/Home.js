@@ -5,18 +5,13 @@ import { useDispatch, useSelector } from "react-redux";
 
 import Recommanded from "../components/Movies-List-Card/Recommanded";
 import DisneyPlusOriginals from "../components/Movies-List-Card/DisneyPlusOriginals";
-import TwistInTheTale from "../components/Movies-List-Card/Twist_in_the_Tale";
-import AnimatedAdventures from "../components/Movies-List-Card/Animated_Adventures";
-import LatestOnDisneyPlus from "../components/Movies-List-Card/Latest_on_Disney_Plus";
-import BehindTheScenes from "../components/Movies-List-Card/Behind_the_Scenes";
-import AttackOfAnime from "../components/Movies-List-Card/Attack_of_Anime";
+import BestOfSuperHeros from "../components/Movies-List-Card/Best_of_Super_Heros";
+import TalesFromJapan from "../components/Movies-List-Card/Tales_from_Japan";
 import { useEffect } from "react";
 import fetchMovieData from "../store/actions";
 
 const Home = () => {
   const dispatch = useDispatch();
-  const recommand = useSelector((state) => state.movie.recommand);
-  // console.log(recommand);
 
   useEffect(() => {
     dispatch(fetchMovieData());
@@ -29,11 +24,8 @@ const Home = () => {
 
       <Recommanded />
       <DisneyPlusOriginals />
-      <TwistInTheTale />
-      <AnimatedAdventures />
-      <LatestOnDisneyPlus />
-      <BehindTheScenes />
-      <AttackOfAnime />
+      <BestOfSuperHeros />
+      <TalesFromJapan />
     </Container>
   );
 };

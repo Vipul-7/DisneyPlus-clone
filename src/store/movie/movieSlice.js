@@ -3,11 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   recommand: null,
   disneyPlusOriginals: null,
-  twistInTheTale: null,
-  animatedAdventures: null,
-  latestOnDisneyPlus: null,
-  behindTheScenes: null,
-  attackOfAnime: null,
+  bestOfTheSuperheros: null,
+  talesFromJapan: null,
 };
 
 const movieSlice = createSlice({
@@ -17,11 +14,8 @@ const movieSlice = createSlice({
     setMovies: (state, action) => {
       state.recommand = action.payload.recommand;
       state.disneyPlusOriginals = action.payload.disneyPlusOriginals;
-      state.twistInTheTale = action.payload.twistInTheTale;
-      state.animatedAdventures = action.payload.animatedAdventures;
-      state.latestOnDisneyPlus = action.payload.latestOnDisneyPlus;
-      state.behindTheScenes = action.payload.behindTheScenes;
-      state.attackOfAnime = action.payload.attackOfAnime;
+      state.bestOfTheSuperheros = action.payload.bestOfTheSuperheros;
+      state.talesFromJapan = action.payload.talesFromJapan;
     },
   },
 });
